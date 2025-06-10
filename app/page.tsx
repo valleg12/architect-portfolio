@@ -14,6 +14,8 @@ const projects = [
   { id: 6, slug: "collage", name: "Le collage", image: "zoom \"le collage\".jpg" },
 ]
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export default function HomePage() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)
 
@@ -59,7 +61,7 @@ export default function HomePage() {
               <Link href={`/project/${project.slug}`}>
                 <div className="relative w-80 md:w-96" style={{ aspectRatio: '3/2' }}>
                   <Image
-                    src={project.image ? `/${project.image}` : "/placeholder.svg"}
+                    src={project.image ? `${basePath}/${project.image}` : `${basePath}/placeholder.svg`}
                     alt={project.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105 rounded-lg"
