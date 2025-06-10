@@ -15,6 +15,9 @@ const nextConfig = {
   output: 'export',
   basePath: isProd ? '/architect-portfolio' : '',
   assetPrefix: isProd ? '/architect-portfolio/' : '',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? '/architect-portfolio' : '',
+  },
   trailingSlash: true,
 }
 
