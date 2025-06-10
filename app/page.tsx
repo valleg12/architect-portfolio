@@ -14,7 +14,7 @@ const projects = [
   { id: 6, slug: "collage", name: "Le collage", image: "zoom-le-collage.jpg" },
 ]
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const basePath = '/architect-portfolio';
 
 export default function HomePage() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null)

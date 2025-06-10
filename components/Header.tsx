@@ -5,7 +5,7 @@ import Image from "next/image"
 
 export default function Header() {
   const [showAbout, setShowAbout] = useState(false)
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const basePath = '/architect-portfolio';
   return (
     <header className="w-full flex flex-col items-center mt-8 mb-8 select-none">
       <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-black uppercase mb-2">CLEMENTINE POLSENAERE</h1>
