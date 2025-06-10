@@ -6,12 +6,12 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 
 const projects = [
-  { id: 1, slug: "rue-faidherbe", name: "Rue Faidherbe", image: "zoom \"rue de faidherbe\".png" },
-  { id: 2, slug: "ecole-cuisine", name: "L'Ecole de restauration", image: "zoom \"Ecole de restauration\".png" },
-  { id: 3, slug: "rue-levis", name: "Rue Lévis", image: "zoom \"rue de levis\".png" },
-  { id: 4, slug: "escalier", name: "L'escalier", image: "zoom \"l'escalier\".png" },
-  { id: 5, slug: "montmorency", name: "Montmorency", image: "zoom \"montmorency\".png" },
-  { id: 6, slug: "collage", name: "Le collage", image: "zoom \"le collage\".jpg" },
+  { id: 1, slug: "rue-faidherbe", name: "Rue Faidherbe", image: "zoom-rue-de-faidherbe.png" },
+  { id: 2, slug: "ecole-cuisine", name: "L'Ecole de restauration", image: "zoom-ecole-de-restauration.png" },
+  { id: 3, slug: "rue-levis", name: "Rue Lévis", image: "zoom-rue-de-levis.png" },
+  { id: 4, slug: "escalier", name: "L'escalier", image: "zoom-lescalier.png" },
+  { id: 5, slug: "montmorency", name: "Montmorency", image: "zoom-montmorency.png" },
+  { id: 6, slug: "collage", name: "Le collage", image: "zoom-le-collage.jpg" },
 ]
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
