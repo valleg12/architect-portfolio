@@ -11,6 +11,8 @@ const nextConfig = {
   },
   devIndicators: false,
   output: 'export',
+  basePath: '/architect-portfolio',
+  assetPrefix: '/architect-portfolio/',
 }
 
 export default nextConfig

@@ -1,11 +1,10 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 import React from "react"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
+import ProjectClient from "./ProjectClient"
 
 const projectsData = {
   "rue-faidherbe": {
@@ -141,91 +140,20 @@ function ProjectDescription({ description }: { description: string }) {
   );
 }
 
-export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = React.use(params)
-  const project = projectsData[slug as keyof typeof projectsData] as { name: string; description: string; mainImage?: string; additionalImages: string[] }
+export default function ProjectPage({ params }: { params: { slug: string } }) {
+  const slug = params.slug
+  const project = projectsData[slug as keyof typeof projectsData]
 
   if (!project) {
     notFound()
   }
 
-  const [open, setOpen] = React.useState(false)
-  const [selectedImage, setSelectedImage] = React.useState<string | null>(null)
+  return <ProjectClient project={project} slug={slug} />
+}
 
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image)
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-    setSelectedImage(null)
-  }
-
-  return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="fixed top-8 left-8 z-10">
-        <Link
-          href="/"
-          className="flex items-center gap-3 text-black hover:text-gray-600 transition-colors duration-300"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Link>
-      </nav>
-
-      <div className="pt-24 pb-16 px-8 max-w-6xl mx-auto">
-        {/* Titre du projet */}
-        <div className="mb-12">
-          <div className="w-16 h-px bg-black mb-4"></div>
-          <h1 className="text-3xl md:text-4xl font-light tracking-wide text-black">{project.name}</h1>
-        </div>
-
-        {/* Image principale */}
-        {slug !== "a-propos" && slug !== "montmorency" && project.mainImage && (
-          <div className="mb-12">
-            <div className="relative w-full h-96 md:h-[600px] overflow-hidden">
-              <Image
-                src={project.mainImage}
-                alt={project.name}
-                fill
-                className={slug === "rue-levis" ? "object-contain bg-white" : "object-cover"}
-                priority
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Description */}
-        <div className="mb-16 max-w-3xl">
-          <ProjectDescription description={project.description} />
-        </div>
-
-        {/* Images additionnelles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {project.additionalImages.map((image, index) => (
-            <div key={index} className="relative w-full h-80 overflow-hidden cursor-pointer" onClick={() => handleImageClick(image)}>
-              <Image
-                src={image || "/placeholder.svg"}
-                alt={`${project.name} - Image ${index + 1}`}
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      {/* Lightbox Dialog */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className={`flex items-center justify-center p-0 max-w-3xl ${selectedImage && selectedImage.match(/\/meuble( |)\d+\.png$/) ? 'bg-white' : 'bg-black/90'}`}>
-          <DialogTitle asChild>
-            <span className="sr-only">Image projet agrandie</span>
-          </DialogTitle>
-          {selectedImage && (
-            <img src={selectedImage} alt="Image projet agrandie" className="max-h-[80vh] max-w-full object-contain" onClick={handleClose} />
-          )}
-        </DialogContent>
-      </Dialog>
-    </div>
-  )
+// Génération des slugs pour l'export statique
+export function generateStaticParams() {
+  return (Object.keys(projectsData) as Array<keyof typeof projectsData>)
+    .filter((slug) => !!projectsData[slug])
+    .map((slug) => ({ slug }))
 }
