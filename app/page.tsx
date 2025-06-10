@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { getImagePath } from '@/lib/getImagePath'
 
 const projects = [
   { id: 1, slug: "rue-faidherbe", name: "Rue Faidherbe", image: "zoom-rue-de-faidherbe.png" },
@@ -61,7 +62,7 @@ export default function HomePage() {
               <Link href={`/project/${project.slug}`}>
                 <div className="relative w-80 md:w-96" style={{ aspectRatio: '3/2' }}>
                   <Image
-                    src={project.image ? `${basePath}/${project.image}` : `${basePath}/placeholder.svg`}
+                    src={getImagePath('/' + project.image)}
                     alt={project.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105 rounded-lg"
