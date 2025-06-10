@@ -44,7 +44,7 @@ export default function ProjectClient({ project, slug }: { project: any, slug: s
           <div className="mb-12">
             <div className="relative w-full h-96 md:h-[600px] overflow-hidden">
               <Image
-                src={project.mainImage}
+                src={`/${project.mainImage}`}
                 alt={project.name}
                 fill
                 className={slug === "rue-levis" ? "object-contain bg-white" : "object-cover"}
@@ -64,7 +64,7 @@ export default function ProjectClient({ project, slug }: { project: any, slug: s
           {project.additionalImages.map((image: string, index: number) => (
             <div key={index} className="relative w-full h-80 overflow-hidden cursor-pointer" onClick={() => handleImageClick(image)}>
               <Image
-                src={image || "/placeholder.svg"}
+                src={image ? `/${image}` : "/placeholder.svg"}
                 alt={`${project.name} - Image ${index + 1}`}
                 fill
                 className="object-cover hover:scale-105 transition-transform duration-700"
@@ -80,7 +80,7 @@ export default function ProjectClient({ project, slug }: { project: any, slug: s
             <span className="sr-only">Image projet agrandie</span>
           </DialogTitle>
           {selectedImage && (
-            <img src={selectedImage} alt="Image projet agrandie" className="max-h-[80vh] max-w-full object-contain" onClick={handleClose} />
+            <img src={selectedImage.startsWith('/') ? selectedImage : `/${selectedImage}`} alt="Image projet agrandie" className="max-h-[80vh] max-w-full object-contain" onClick={handleClose} />
           )}
         </DialogContent>
       </Dialog>
