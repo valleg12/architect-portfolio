@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production';
+const isNetlify = process.env.NETLIFY === 'true';
 
 const nextConfig = {
   eslint: {
@@ -13,10 +14,10 @@ const nextConfig = {
   },
   devIndicators: false,
   output: 'export',
-  basePath: isProd ? '/architect-portfolio' : '',
-  assetPrefix: isProd ? '/architect-portfolio/' : '',
+  basePath: isProd && !isNetlify ? '/architect-portfolio' : '',
+  assetPrefix: isProd && !isNetlify ? '/architect-portfolio/' : '',
   env: {
-    NEXT_PUBLIC_BASE_PATH: isProd ? '/architect-portfolio' : '',
+    NEXT_PUBLIC_BASE_PATH: isProd && !isNetlify ? '/architect-portfolio' : '',
   },
   trailingSlash: true,
 }
